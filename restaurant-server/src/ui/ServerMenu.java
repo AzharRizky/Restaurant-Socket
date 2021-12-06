@@ -30,8 +30,8 @@ public class ServerMenu extends JFrame {
 
     public ServerMenu() throws IOException {
         this.serverSocket = new ServerSocket(7896);
-        //Image icon = Toolkit.getDefaultToolkit().getImage((getClass().getResource("logo.png")));
-        //setIconImage(icon);
+        Image icon = Toolkit.getDefaultToolkit().getImage((getClass().getResource("/assets/logo.png")));
+        setIconImage(icon);
         setTitle("Restaurant Server");
         GUIServerMenu();
         menuTable(modelMenu);
@@ -298,14 +298,28 @@ public class ServerMenu extends JFrame {
         crudMenuPanel.setBorder(BorderFactory.createTitledBorder("Edit Menu Restaurant"));
 
         JPanel menuPanel = new JPanel();
-        registerPanel.setLayout(gb);
+        menuPanel.setLayout(gb);
+
+        JButton btRefreshMenu = new JButton("Refresh Menu");
+        gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridwidth = 2;
+        gbc.ipady = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gb.setConstraints(btRefreshMenu, gbc);
+        menuPanel.add(btRefreshMenu);
+        btRefreshMenu.addActionListener(e -> {
+            menuTable(modelMenu);
+        });
 
         tableMenu = new JTable(modelMenu);
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         gb.setConstraints(tableMenu, gbc);
         menuPanel.add(tableMenu);
         menuPanel.add(new JScrollPane(tableMenu));
@@ -315,12 +329,28 @@ public class ServerMenu extends JFrame {
         JPanel pesananPanel = new JPanel();
         pesananPanel.setLayout(gb);
 
+        JButton btRefreshPesanan = new JButton("Refresh Pesanan");
+        gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridwidth = 2;
+        gbc.ipady = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gb.setConstraints(btRefreshPesanan, gbc);
+        pesananPanel.add(btRefreshPesanan);
+        btRefreshPesanan.addActionListener(e -> {
+            pesananTable(modelPesanan);
+            tablePesanan.getColumnModel().getColumn(5).setCellRenderer(new ButtonRenderer());
+            tablePesanan.getColumnModel().getColumn(5).setCellEditor(new ButtonEditor(new JTextField()));
+        });
+
         tablePesanan = new JTable(modelPesanan);
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         gb.setConstraints(tablePesanan, gbc);
         pesananPanel.add(tablePesanan);
 

@@ -20,8 +20,8 @@ public class DetailPesanan extends JFrame {
         DetailPesanan.id = id;
         dataDetail();
 
-        //Image icon = Toolkit.getDefaultToolkit().getImage((getClass().getResource("logo.png")));
-        //setIconImage(icon);
+        Image icon = Toolkit.getDefaultToolkit().getImage((getClass().getResource("/assets/logo.png")));
+        setIconImage(icon);
         setTitle("Detail Pesanan");
         GUIDetailPesanan();
         pesananTable(modelPesanan);
