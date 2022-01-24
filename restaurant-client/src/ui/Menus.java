@@ -22,6 +22,7 @@ public class Menus extends JFrame {
     private ObjectOutputStream out;
     private ObjectInputStream in;
     private String Snama;
+    private String msgFromAll;
     static public  JTable table;
     DefaultTableModel model = new DefaultTableModel(new String[]{"Nama Menu", "Harga Satuan", "Jumlah", "Harga per Pesanan"}, 0 );
     private double total;
@@ -33,8 +34,8 @@ public class Menus extends JFrame {
             this.in = new ObjectInputStream(socket.getInputStream());
             this.Snama = name;
 
-            Image icon = Toolkit.getDefaultToolkit().getImage((getClass().getResource("/assets/logo.png")));
-            setIconImage(icon);
+            //Image icon = Toolkit.getDefaultToolkit().getImage((getClass().getResource("logo.png")));
+            //setIconImage(icon);
             receivedObject(menuComboBox, hargaComboBox);
             setTitle("Restaurant Client");
             GUIMenu();
@@ -102,7 +103,7 @@ public class Menus extends JFrame {
         gb.setConstraints(LAntrian, gbc);
         menuPanel.add(LAntrian);
 
-        antrian = new Label("");
+        antrian = new Label(msgFromAll);
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.BOTH;
@@ -154,6 +155,7 @@ public class Menus extends JFrame {
 
                 for (int i = 0; i < table.getRowCount(); i++) {
                     Pesanan pesanan = new Pesanan();
+                    pesanan.noPesanan = antrian.getText();
                     pesanan.menu = (String) table.getValueAt(i, 0);
                     pesanan.jumlah = (String) table.getValueAt(i, 2);
                     pesanan.harga = (double) table.getValueAt(i, 3);

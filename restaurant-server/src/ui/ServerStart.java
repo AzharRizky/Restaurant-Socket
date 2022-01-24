@@ -1,17 +1,19 @@
 package ui;
 
+import database.connection;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Objects;
 
 public class ServerStart extends JFrame implements ActionListener {
 
     public ServerStart() {
-        Image icon = Toolkit.getDefaultToolkit().getImage((getClass().getResource("/assets/logo.png")));
-        setIconImage(icon);
+
+        //Image icon = Toolkit.getDefaultToolkit().getImage((getClass().getResource("logo.png")));
+        //setIconImage(icon);
         setTitle("Restaurant Server");
         GUIServer();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,21 +62,9 @@ public class ServerStart extends JFrame implements ActionListener {
         gbc.gridy = 0;
         panelNama.add(Laplikasi, gbc);
 
-        JPanel gambar = new JPanel();
-        gambar.setLayout(gb);
-        gambar.setBorder(BorderFactory.createEtchedBorder());
-        var image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/assets/menu.jpg")));
-        gambar.add(new JLabel("", image, SwingConstants.CENTER));
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        gambar.setBounds((int) ((screenSize.getWidth() - image.getIconWidth()) / 2),
-                (int) ((screenSize.getHeight() - image.getIconHeight()) / 2),
-                image.getIconWidth(), image.getIconHeight());
-
-        cp.add(registerPanel, new GridBagConstraints(0, 2, 2, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0,
+        cp.add(registerPanel, new GridBagConstraints(0, 1, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0, 0,
                 0, 0), 0, 0));
         cp.add(panelNama, new GridBagConstraints(0, 0, 2, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0, 2,
-                0, 0), 0, 0));
-        cp.add(gambar, new GridBagConstraints(0, 1, 2, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0, 2,
                 0, 0), 0, 0));
     }
 
@@ -87,6 +77,11 @@ public class ServerStart extends JFrame implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main (String[] args) {
+        connection.setConnection();
+        new ServerStart();
     }
 }
 

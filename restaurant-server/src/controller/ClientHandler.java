@@ -34,15 +34,20 @@ public class ClientHandler extends Thread {
 
     @Override
     public void run() {
-        try {
-            var x = in.readObject();
-            if (x.equals("Menu")) {
-                sendMenu();
-            } else {
-                receivedPesanan((Vector) x);
+        while(socket.isConnected()) {
+            try {
+                var x = in.readObject();
+                if (x.equals("Menu")) {
+                    sendMenu();
+                    break;
+                } else {
+                    receivedPesanan((Vector) x);
+                    break;
+                }
+            } catch (IOException | SQLException | ClassNotFoundException e) {
+                closeEverything(socket, in, out);
+                break;
             }
-        } catch (IOException | SQLException | ClassNotFoundException e) {
-            closeEverything(socket, in, out);
         }
     }
 
@@ -90,6 +95,7 @@ public class ClientHandler extends Thread {
         while(rs.next()){
             Menu menu = new Menu();
             menu.antrian = increment;
+            menu.id = rs.getString("id");
             menu.nama = rs.getString("nama");
             menu.harga = rs.getString("harga");
             records.addElement(menu);
