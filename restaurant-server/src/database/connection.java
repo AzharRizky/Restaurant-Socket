@@ -17,7 +17,7 @@ public class connection {
             connection = DriverManager.getConnection(url, user, pass);
         }
         catch (SQLException t){
-            System.out.println(t);
+            t.printStackTrace();
         }
     }
 }

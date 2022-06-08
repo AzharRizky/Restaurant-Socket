@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="restaurant-server:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/restaurant_server_jar</output-path>
+    <root id="archive" name="restaurant-server.jar">
+      <element id="module-output" name="restaurant-server" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../TugasRPL/lib/mysql-connector-java-8.0.22.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -20,8 +20,8 @@ public class Report extends JFrame {
         Report.socket = socket;
         Report.records = record;
 
-        //Image icon = Toolkit.getDefaultToolkit().getImage((getClass().getResource("logo.png")));
-        //setIconImage(icon);
+        Image icon = Toolkit.getDefaultToolkit().getImage((getClass().getResource("/assets/logo.png")));
+        setIconImage(icon);
         setTitle("Restaurant Client");
         GUIMenu();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,7 +71,7 @@ public class Report extends JFrame {
         int detik = clr.get(Calendar.SECOND);
         int am_pm = clr.get(Calendar.AM_PM);
 
-        String siang_malam = "";
+        String siang_malam;
         if (am_pm == 1) {
             siang_malam = "PM";
         }
@@ -83,7 +83,7 @@ public class Report extends JFrame {
 
         String noPesanan = tahun + "" + bulan + "" + tanggal + "" + transaksi.antrian;
 
-        struk.append("\t\tTgl. " + tanggal + "/" + bulan + "/" + tahun +
+        struk.append("\t\t  Tgl. " + tanggal + "/" + bulan + "/" + tahun +
                 "   (" + jam + ":" + menit + ":" + detik + " " + siang_malam + ")");
         struk.append("\n=================================================\n"
                 + "No Pesanan\t      :   " + noPesanan
@@ -140,7 +140,6 @@ public class Report extends JFrame {
         } catch (IOException e) {
             closeEverything(socket);
         }
-
     }
 
     public void closeEverything(Socket socket) {
